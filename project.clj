@@ -26,6 +26,7 @@
                  [ring/ring-core "1.6.3"]
                  [ring/ring-defaults "0.3.1"]
                  [selmer "1.11.7"]
+                
 
                  [jumblerg/ring.middleware.cors "1.0.1"] ;; CORS
                  [com.github.sarxos/webcam-capture "0.3.12"] ;; Webcam

@@ -38,9 +38,65 @@
    :headers {"Content-Type" "application/json"}
    :body (json/write-str (getcams))})
 
+(def ruta "/home/pbautista/camara1.png")
+
+   (defn hace-todo [route]
+
+     (let [webcam (Webcam/getDefault) vector (new Dimension 1920 1080)]
+        ;  (println "Tipo Vector:" (type vector))
+(println "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" route)
+         (.setCustomViewSizes webcam (into-array Dimension [vector]))
+          (.setViewSize webcam vector)
+          (.open webcam false)
+          (let [image (.getImage webcam)]
+         (let [file (new File ruta)]
+         (ImageIO/write image "PNG" file)))
+         (.close webcam)
+       ;  (about-page)
+          )
+
+
+
+     {:status 200
+      :headers {"Content-Type" "application/json"}
+      :body  "Se ha guardado la foto"}
+
+
+
+     )
+(def ruta2 "/home/pbautista/camara2.png")
+(def cam2 "HD Pro Webcam C920 /dev/video1")
+     (defn hace-todo2 [route]
+
+       (let [webcam (Webcam/getWebcamByName cam2) vector (new Dimension 1920 1080)]
+          ;  (println "Tipo Vector:" (type vector))
+  (println "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" route)
+           (.setCustomViewSizes webcam (into-array Dimension [vector]))
+            (.setViewSize webcam vector)
+            (.open webcam false)
+            (let [image (.getImage webcam)]
+           (let [file (new File ruta2)]
+           (ImageIO/write image "PNG" file)))
+           (.close webcam)
+         ;  (about-page)
+            )
+
+
+
+       {:status 200
+        :headers {"Content-Type" "application/json"}
+        :body  "Se ha guardado la foto"}
+
+
+
+       )
+
 (defroutes home-routes
   (GET "/" [] (home-page))
   (GET "/about" [] (about-page))
   (GET "/json" [] (my-json))
   (GET "/json2" req (my-json2 req))
-  (GET "/cams" req (get-webcams req)))
+  (GET "/cams" req (get-webcams req))
+  (GET "/foto" route (hace-todo route ))
+  (GET "/foto2" route (hace-todo2 route ))
+  )
