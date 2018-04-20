@@ -66,6 +66,15 @@
      )
 (def ruta2 "/home/pbautista/camara2.png")
 (def cam2 "HD Pro Webcam C920 /dev/video1")
+;(defn redirect! [loc] (set! (.-location js/window) loc))
+
+; (defn redirect
+; [url]
+; (-> js/document
+; .-location
+; (set! url)))
+
+
      (defn hace-todo2 [route]
 
        (let [webcam (Webcam/getWebcamByName cam2) vector (new Dimension 1920 1080)]
@@ -79,6 +88,8 @@
            (ImageIO/write image "PNG" file)))
            (.close webcam)
          ;  (about-page)
+
+         (redirect "http://localhost:3449/")
             )
 
 
@@ -90,6 +101,9 @@
 
 
        )
+
+
+
 
 (defroutes home-routes
   (GET "/" [] (home-page))
